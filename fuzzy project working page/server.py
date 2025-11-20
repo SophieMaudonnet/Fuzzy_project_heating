@@ -8,6 +8,9 @@ CORS(app)
 
 print("FLASK STARTED - CORS SHOULD BE ENABLED")
 
+#at the beginning set to 5 later used to store sliders preference
+slider_values = {"feeling": 5, "ecology": 5}
+
 def extract_data(output):
     match = re.search(r'\d+\.\d+', output)
     if match:
@@ -41,12 +44,18 @@ def get_data():
 
 
 @app.route("/sliders", methods=["POST"])
-def post_data():
-    data = request.get_json()
-    print("Received:", data)
+def post_sliders():
+    global slider_values
+    print("RAW request data:", request.data)
+    print("RAW request json:", request.get_json(silent=True))
+    slider_values = request.get_json()
+    print("SLIDERS SET TO:", slider_values)
     return jsonify({"status": "ok"})
 
 
+@app.route("/sliders", methods=["GET"])
+def get_sliders():
+    return jsonify(slider_values)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

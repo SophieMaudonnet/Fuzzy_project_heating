@@ -17,3 +17,8 @@ run the webserver with python server.py
 (can check the flask connectivity on the page [localhost:5000/data](http://127.0.0.1:5000/data))
 
 in the end open the html on a browser of your choice
+to avoid problems of POST blocking, do not open it as file:///, rather launch the command
+python -m http.server 8000
+
+and then open the page
+http://localhost:8000/page.html
