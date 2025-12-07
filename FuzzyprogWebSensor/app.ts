@@ -63,29 +63,6 @@ roomButtons.forEach(btn => {
 
 
 
-//to rerun the fuzzy program
-const setChangesBtn = document.getElementById("set_changes_btn") as HTMLButtonElement;
-
-setChangesBtn.addEventListener("click", async () => {
-    console.log("Getting value");
-
-    try {
-        const res = await fetch("http://localhost:5000/heat");
-        const data = await res.json();
-
-        console.log("Heat value:", data);
-
-        if (data.heat !== null && data.heat !== undefined) {
-            alert(`Computed heat (from /heat): ${data.heat.toFixed(2)}°C`);
-        } else {
-            alert("No heat value yet! Run fuzzy logic first.");
-        }
-
-    } catch (err) {
-        console.error("Error reading heat:", err);
-    }
-});
-
 
 
 
@@ -100,7 +77,7 @@ async function updateFromSensor() {
     // Update visible numbers
     document.getElementById("temp_value")!.textContent = data.temperature.toFixed(1);
     document.getElementById("hum_value")!.textContent = data.humidity.toFixed(1);
-    // document.getElementById("heat_value")!.textContent = data.heat.toFixed(2);
+    //document.getElementById("heat_value")!.textContent = data.heat.toFixed(2);
 
     // Update sliders
     tempSlider.value = data.temperature.toString();
@@ -124,17 +101,13 @@ async function updateHeating() {
     const res = await fetch("http://localhost:5000/heat");
     const data = await res.json();
 
-    // Update visible numbers
-
-     document.getElementById("heat_value")!.textContent = data.heat.toFixed(1);
-
-    // Update sliders
-    heatValue.value = data.heat.toString();
-    console.log("heating value", heatValue)
+    if (data.heat !== undefined && data.heat !== null) {
+      document.getElementById("heat_value").textContent = data.heat.toFixed(1);
+    }
 
   } catch (err) {
-    console.error("Error fetching sensor data:", err);
+    console.error("Error reading heat:", err);
   }
 }
-// aggiorna ogni 4 secondi
-setInterval(updateHeating, 4000);
+// aggiorna ogni second0
+setInterval(updateHeating, 1000);
