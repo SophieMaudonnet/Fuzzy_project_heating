@@ -72,7 +72,7 @@ roomButtons.forEach(function (btn) {
     btn.addEventListener("click", function () {
         var roomName = btn.innerText.trim().toLowerCase();
 
-        // Update the UI
+        // Update the shown value
         document.getElementById("room_value").textContent = btn.innerText;
 
 
