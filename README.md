@@ -12,6 +12,12 @@ Keeping a comfortable temperature, avoiding big temperature changes, saving ener
 
 For this project we inplemented four variables as input: temperature, humidity, feeling, ecology, that impact a consequent: heat (the temperature to be reached), using a fuzzy system. First, the inputs are fuzzyfied using membership functions. Then, fuzzy computations are carried out using Mamdani rules and the result is defuzzyfied with the centroid method. This can be manually tested with the Fuzzy_heating_rules.ipynb notebook.
 
+# Sensor setup
+
+The setup of the sensor, the arduino and the cables connections can be done as depicted on the following picture:
+
+<img src="./Images/Sensor.png" width="200">
+
 # How to use?
 
 Our program can be used in two ways:
